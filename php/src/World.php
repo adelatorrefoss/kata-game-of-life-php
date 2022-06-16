@@ -22,7 +22,6 @@ class World
                 if ($cell && $this->numberOfLiveNeighboursFor($row, $col, $rowSize, $colSize) < 2) {
                     $cell->dies();
                 }
-
             }
         }
     }
@@ -34,10 +33,10 @@ class World
             for ($j = -1; $j <= 1; $j++) {
                 $posX = $row + $i;
                 $posY = $col + $j;
-                if ($posX < 0 || $posX > $rowSize-1) {
+                if ($posX < 0 || $posX > $rowSize - 1) {
                     continue;
                 }
-                if ($posY < 0 || $posY > $colSize-1) {
+                if ($posY < 0 || $posY > $colSize - 1) {
                     continue;
                 }
                 if ($posX == $row && $posY == $col) {

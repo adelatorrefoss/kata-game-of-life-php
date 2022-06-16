@@ -13,7 +13,7 @@ class Cell
 
     public function isAlive()
     {
-        return $this->status;
+        return $this->status == self::LIVE;
     }
 
     public function dies()
