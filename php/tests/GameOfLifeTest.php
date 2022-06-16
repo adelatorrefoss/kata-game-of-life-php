@@ -14,6 +14,15 @@ use PHPUnit\Framework\TestCase;
 class GameOfLifeTest extends TestCase
 {
     /** @test */
+    public function any_live_cell_with_no_neighbours_dies()
+    {
+        $cell = new Cell();
+        $world = new World([[null, null, null], [null, $cell, null], [null, null, null]]);
+        $world->play();
+        $this->assertFalse($cell->isAlive());
+    }
+
+    /** @test */
     public function any_live_cell_with_fewer_than_two_live_neighbours_dies()
     {
         /*
@@ -25,7 +34,7 @@ class GameOfLifeTest extends TestCase
 
         $cell = new Cell();
 
-        $world = new World([[null, null, null],[null, $cell, null],[null, null,null]]);
+        $world = new World([[null, null, $cell], [null, $cell, null], [null, null, null]]);
         $world->play();
         $this->assertFalse($cell->isAlive());
     }

@@ -17,7 +17,9 @@ class World
 
                 /** @var Cell $cell */
                 $cell = $this->grid[$row][$col];
-                if ($cell && $this->numberOfLiveNeighboursFor($row, $col) < 2) {
+                $rowSize = count($this->grid);
+                $colSize = count($this->grid[$row]);
+                if ($cell && $this->numberOfLiveNeighboursFor($row, $col, $rowSize, $colSize) < 2) {
                     $cell->dies();
                 }
 
@@ -25,17 +27,17 @@ class World
         }
     }
 
-    private function numberOfLiveNeighboursFor($row, $col)
+    private function numberOfLiveNeighboursFor($row, $col, $rowSize, $colSize)
     {
         $count = 0;
         for ($i = -1; $i <= 1; $i++) {
             for ($j = -1; $j <= 1; $j++) {
                 $posX = $row + $i;
                 $posY = $col + $j;
-                if ($posX < 0) {
+                if ($posX < 0 || $posX > $rowSize-1) {
                     continue;
                 }
-                if ($posY < 0) {
+                if ($posY < 0 || $posY > $colSize-1) {
                     continue;
                 }
                 if ($posX == $row && $posY == $col) {
@@ -48,14 +50,5 @@ class World
                 }
             }
         }
-
-//        $this->grid[$row-1][$col-1]->isAlive()
-//        $this->grid[$row-1][$col]->isAlive()
-//        $this->grid[$row-1][$col+1]->isAlive()
-//        $this->grid[$row][$col-1]->isAlive()
-//        $this->grid[$row][$col+1]->isAlive()
-//        $this->grid[$row+1][$col-1]->isAlive()
-//        $this->grid[$row+1][$col]->isAlive()
-//        $this->grid[$row+1][$col+1]->isAlive()
     }
 }
